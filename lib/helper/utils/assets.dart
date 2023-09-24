@@ -9,4 +9,11 @@ class AppAssets {
   static const String navIcon = "$baseIconPath/nav_icon.svg";
   static const String shipment = "$baseIconPath/shipment.svg";
   static const String profile = "$baseIconPath/person.svg";
+
+  // image Assets
+  static const String forklift = "$baseImagePath/fork.png";
+  static const String send = "$baseImagePath/send.png";
+  static const String receive = "$baseImagePath/receive.png";
+  static const String ship = "$baseImagePath/ship.jpg";
+  static const String truck = "$baseImagePath/truck.png";
 }
