@@ -82,12 +82,12 @@ class MyHomePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    color: Colors.orange,
-                    height: 300,
-                  )),
+              child: Container(
+                child: Text("Tracking",
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                height: 300,
+              ),
             ),
           ),
           SliverToBoxAdapter(
