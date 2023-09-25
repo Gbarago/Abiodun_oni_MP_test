@@ -9,6 +9,12 @@ class AppAssets {
   static const String navIcon = "$baseIconPath/nav_icon.svg";
   static const String shipment = "$baseIconPath/shipment.svg";
   static const String profile = "$baseIconPath/person.svg";
+  static const String box = "$baseIconPath/box.svg";
+  static const String scan = "$baseIconPath/scan.svg";
+  static const String telegram = "$baseIconPath/telegram.svg";
+  static const String loading = "$baseIconPath/loading.svg";
+  static const String pending = "$baseIconPath/pending.svg";
+  static const String progress = "$baseIconPath/progress.svg";
 
   // image Assets
   static const String forklift = "$baseImagePath/fork.png";
@@ -17,4 +23,6 @@ class AppAssets {
   static const String ship = "$baseImagePath/ship.jpg";
   static const String truck = "$baseImagePath/truck.png";
   static const String plane = "$baseImagePath/plane.png";
+  static const String profilePng = "$baseImagePath/profile.png";
+  static const String shipmentBox = "$baseImagePath/shipment_box.png";
 }

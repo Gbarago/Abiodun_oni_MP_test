@@ -45,7 +45,7 @@ class ProductProvider extends ChangeNotifier {
 
   ProductProvider(this.products);
 
-  List<Product> filteredProducts = []; // Initialize a filtered list
+  List<Product> filteredProducts = [];
 
   void filterProducts(String query) {
     print('list isss ======  ${filteredProducts.length}');
@@ -57,6 +57,8 @@ class ProductProvider extends ChangeNotifier {
           .toList();
     } else {
       // If the query is empty, show all products
+      print('list isss333 ======  ${filteredProducts.length}');
+
       filteredProducts = List.from(productsList);
       notifyListeners();
     }

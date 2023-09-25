@@ -7,7 +7,6 @@ const Color buttonGrteen = Color(0xFF008753);
 Color liteBlueColor = const Color(0xFfDEF5FF).withOpacity(0.14);
 const Color appBlack = Color(0xFF000000);
 const Color blackLiteColor = Color(0xFF666666);
-const Color unselectedColor = Color.fromARGB(255, 173, 6, 6);
 
 Color darkerPrimaryColor = Color.fromRGBO(
   primaryColor.red ~/ 2,

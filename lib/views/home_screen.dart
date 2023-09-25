@@ -3,6 +3,8 @@ import 'package:abiodun_mobile/helper/utils/colors.dart';
 import 'package:abiodun_mobile/helper/utils/screen_aware_size.dart';
 import 'package:abiodun_mobile/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({
@@ -12,194 +14,224 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            leading: const Padding(
-                padding: EdgeInsets.only(left: 10), child: CircleAvatar()),
-            centerTitle: false,
-            title: const Column(
+      appBar: AppBar(
+        toolbarHeight: screenAwareSize(120, context),
+        centerTitle: false,
+        automaticallyImplyLeading: true,
+        title: Column(
+          children: [
+            Row(
               children: [
-                Row(
+                Padding(
+                    padding: EdgeInsets.only(left: 5, right: 10),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(AppAssets.profilePng),
+                    )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SvgPicture.asset(
-                    //   AppAssets.navIcon,
-                    //   color: Colors.white24,
-                    // ),
-
-                    Icon(Icons.location_pin),
-                    Text(
-                      '  Your location',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SvgPicture.asset(
+                          AppAssets.telegram,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        const Text(
+                          'Your location',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 14),
+                        )
+                      ],
+                    ),
+                    const Row(
+                      children: [Text('Werthiemer Illinois')],
                     )
                   ],
                 ),
-                Row(
-                  children: [Text('Werthiemer Illinois')],
-                )
+                SizedBox(
+                  width: screenAwareSize(95, context),
+                ),
+                const Expanded(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.notifications_on_outlined,
+                      color: blackLiteColor,
+                    ),
+                  ),
+                ),
               ],
             ),
-            actions: const [
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.notifications_on_outlined,
-                  color: blackLiteColor,
-                ),
-              ),
-            ],
-            expandedHeight: screenAwareSize(120, context),
-            flexibleSpace: FlexibleSpaceBar(
-              title: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.searchProductsScreen);
-                },
-                child: const AppBarSearchWidget(
-                  isEnabled: false,
-                ),
+            SizedBox(
+              height: screenAwareSize(20, context),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.searchProductsScreen);
+              },
+              child: const AppBarSearchWidget(
+                isEnabled: false,
               ),
             ),
-            pinned: false,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SizedBox(
-                height: 30,
-                child: Text(
-                  "Tracking",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: darkerPrimaryColor,
-                  ),
+          ],
+        ).animate().fadeIn(duration: 500.ms).slideY(begin: .0, end: .1),
+      ),
+      body: SizedBox(
+        child: ListView(children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              child: Text(
+                "Tracking",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: darkerPrimaryColor,
                 ),
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                  child: Card(
-                elevation: 0.5,
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  height: 300,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Shipment Number',
-                                style: TextStyle(fontSize: 16)),
-                            Text('NEJ2008992413301',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w600)),
-                          ],
-                        ),
-                        trailing: Container(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: const Image(
-                              image: AssetImage(AppAssets.forklift)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Divider(
-                          height: 4,
-                          color: Colors.black45,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SenderReceiverCardWidget(
-                        isSender: true,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SenderReceiverCardWidget(
-                        isSender: false,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Divider(
-                          height: 4,
-                          color: Colors.black45,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ClipRRect(
+                child: Card(
+              elevation: 0.5,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                height: myScreenHeight(1, context) > 700
+                    ? 310
+                    : screenAwareSize(310, context),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.add,
-                            color: accentColor,
-                          ),
-                          Text(
-                            ' Add Stop',
-                            style: TextStyle(
-                                color: accentColor,
-                                fontWeight: FontWeight.w600),
-                          )
+                          Text('Shipment Number',
+                              style: TextStyle(fontSize: 16)),
+                          Text('NEJ2008992413301',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w600)),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                      trailing: Container(
+                        padding: const EdgeInsets.only(top: 8),
+                        child:
+                            const Image(image: AssetImage(AppAssets.forklift)),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        height: 4,
+                        color: Colors.black45.withOpacity(0.2),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        height: 4,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const SenderReceiverCardWidget(
+                      isSender: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const SenderReceiverCardWidget(
+                      isSender: false,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        height: 4,
+                        color: Colors.black45.withOpacity(0.2),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: accentColor,
+                        ),
+                        Text(
+                          ' Add Stop',
+                          style: TextStyle(
+                              color: accentColor, fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    )
+                  ],
                 ),
-              )),
-            ),
+              ),
+            )),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                height: 30,
-                child: Text(
-                  "Avialable Vehicles",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: darkerPrimaryColor,
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                "Avialable Vehicles",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: darkerPrimaryColor,
                 ),
               ),
             ),
           ),
           AnimatedSliverToBoxAdapter(),
-        ],
+        ])
+            .animate()
+            .fadeIn(duration: 500.ms)
+            .slide(begin: const Offset(0, 1.0)),
       ),
     );
   }
 }
 
 class AppBarSearchWidget extends StatelessWidget {
+  final TextEditingController? searchController;
   final bool isEnabled;
-  const AppBarSearchWidget({
-    super.key,
-    required this.isEnabled,
-  });
+
+  final void Function(String)? onChanged;
+
+  const AppBarSearchWidget(
+      {super.key,
+      required this.isEnabled,
+      this.searchController,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(30)),
       width: myScreenWidth(0.85, context),
-      height: screenAwareSize(25, context),
+      height: screenAwareSize(37, context),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -213,14 +245,21 @@ class AppBarSearchWidget extends StatelessWidget {
           Expanded(
               child: TextField(
             enabled: isEnabled,
+            controller: searchController,
+            onChanged: onChanged,
             decoration: const InputDecoration(
+                border: InputBorder.none,
                 hintText: ' Enter the receipt number ...',
                 hintStyle: TextStyle(fontSize: 12)),
           )),
-          const Padding(
-            padding: EdgeInsets.all(4.3),
+          Padding(
+            padding: const EdgeInsets.all(4.3),
             child: CircleAvatar(
               backgroundColor: Colors.orange,
+              child: SvgPicture.asset(
+                AppAssets.scan,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
@@ -241,7 +280,6 @@ class SenderReceiverCardWidget extends StatelessWidget {
     return ListTile(
       leading: Container(
         width: 30,
-        // padding: const EdgeInsets.only(top: 10, right: 10),
         child: Image(
             image: AssetImage(isSender ? AppAssets.send : AppAssets.receive)),
       ),
@@ -383,22 +421,86 @@ class _AnimatedSliverToBoxAdapterState
       ),
     );
 
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: SizedBox(
-            height: 200,
-            child: AnimatedBuilder(
-              animation: _animationController,
-              builder: (context, child) {
-                return ListView(
-                  scrollDirection: Axis.horizontal,
-                  //  controller: _scrollController,
-                  children: [
-                    Container(
-                      width: 180,
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: SizedBox(
+          height: 200,
+          child: AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return ListView(
+                scrollDirection: Axis.horizontal,
+                //  controller: _scrollController,
+                children: [
+                  Container(
+                    width: 180,
+                    child: SlideTransition(
+                      position: position,
+                      child: GridTile(
+                        header: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ocean Freight',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w800,
+                                  color: blackLiteColor.withOpacity(0.8)),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text('International',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: blackLiteColor.withOpacity(0.8))),
+                          ],
+                        ),
+                        child: Image(image: AssetImage(AppAssets.ship)),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 180,
+                    child: FadeTransition(
+                      opacity: opacity,
+                      child: SlideTransition(
+                        position: position,
+                        child: GridTile(
+                          header: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Ocean Freight',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: blackLiteColor.withOpacity(0.8)),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text('Reliable',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: blackLiteColor.withOpacity(0.8))),
+                            ],
+                          ),
+                          child: Image(image: AssetImage(AppAssets.truck)),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 180,
+                    child: FadeTransition(
+                      opacity: opacity,
                       child: SlideTransition(
                         position: position,
                         child: GridTile(
@@ -423,82 +525,18 @@ class _AnimatedSliverToBoxAdapterState
                                       color: blackLiteColor.withOpacity(0.8))),
                             ],
                           ),
-                          child: Image(image: AssetImage(AppAssets.ship)),
+                          child: Image(image: AssetImage(AppAssets.plane)),
                         ),
                       ),
                     ),
-                    Container(
-                      width: 180,
-                      child: FadeTransition(
-                        opacity: opacity,
-                        child: SlideTransition(
-                          position: position,
-                          child: GridTile(
-                            header: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ocean Freight',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      color: blackLiteColor.withOpacity(0.8)),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text('Reliable',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            blackLiteColor.withOpacity(0.8))),
-                              ],
-                            ),
-                            child: Image(image: AssetImage(AppAssets.truck)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 180,
-                      child: FadeTransition(
-                        opacity: opacity,
-                        child: SlideTransition(
-                          position: position,
-                          child: GridTile(
-                            header: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ocean Freight',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      color: blackLiteColor.withOpacity(0.8)),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text('International',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            blackLiteColor.withOpacity(0.8))),
-                              ],
-                            ),
-                            child: Image(image: AssetImage(AppAssets.plane)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              )
+                  .animate()
+                  .fadeIn(duration: 800.ms)
+                  // baseline=800ms
+                  .slide(begin: const Offset(1.0, 0.0));
+            },
           ),
         ),
       ),
