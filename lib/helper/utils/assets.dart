@@ -16,4 +16,5 @@ class AppAssets {
   static const String receive = "$baseImagePath/receive.png";
   static const String ship = "$baseImagePath/ship.jpg";
   static const String truck = "$baseImagePath/truck.png";
+  static const String plane = "$baseImagePath/plane.png";
 }

@@ -1,9 +1,8 @@
 import 'package:abiodun_mobile/helper/utils/assets.dart';
 import 'package:abiodun_mobile/helper/utils/colors.dart';
 import 'package:abiodun_mobile/helper/utils/screen_aware_size.dart';
-import 'package:abiodun_mobile/providers/nav_provider.dart';
+import 'package:abiodun_mobile/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({
@@ -17,14 +16,18 @@ class MyHomePage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             leading: const Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: const CircleAvatar()),
+                padding: EdgeInsets.only(left: 10), child: CircleAvatar()),
             centerTitle: false,
             title: const Column(
               children: [
                 Row(
                   children: [
-                    Icon(Icons.share_location),
+                    // SvgPicture.asset(
+                    //   AppAssets.navIcon,
+                    //   color: Colors.white24,
+                    // ),
+
+                    Icon(Icons.location_pin),
                     Text(
                       '  Your location',
                       style:
@@ -40,41 +43,20 @@ class MyHomePage extends StatelessWidget {
             actions: const [
               CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Icon(Icons.notifications_on_outlined),
+                child: Icon(
+                  Icons.notifications_on_outlined,
+                  color: blackLiteColor,
+                ),
               ),
             ],
             expandedHeight: screenAwareSize(120, context),
             flexibleSpace: FlexibleSpaceBar(
-              title: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30)),
-                width: myScreenWidth(0.85, context),
-                height: screenAwareSize(30, context),
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Icon(
-                      Icons.search,
-                      color: primaryColor,
-                    ),
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          hintText: 'Enter the receipt number ...',
-                          hintStyle: TextStyle(fontSize: 12)),
-                    )),
-                    Padding(
-                      padding: EdgeInsets.all(4.3),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.orange,
-                      ),
-                    ),
-                  ],
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.searchProductsScreen);
+                },
+                child: const AppBarSearchWidget(
+                  isEnabled: false,
                 ),
               ),
             ),
@@ -182,7 +164,7 @@ class MyHomePage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                 height: 30,
                 child: Text(
@@ -196,39 +178,51 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          //  SliverToBoxAdapter(
-          //     // child: Padding(
-          //   padding: const EdgeInsets.all(20.0),
-          //   child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(20),
-          //       child: SizedBox(
-          //         height: 200,
-          //         child: ListView(
-          //           scrollDirection: Axis.horizontal,
-          //           children: [
-          //             Container(
-          //                 width: 200,
-          //                 child: GridTile(
-          //                   child: Image(image: AssetImage(AppAssets.ship)),
-          //                 )),
-          //             Container(
-          //                 width: 200,
-          //                 child: GridTile(
-          //                   child: Image(image: AssetImage(AppAssets.truck)),
-          //                 )),
-          //             Container(
-          //                 width: 200,
-          //                 child: GridTile(
-          //                   child: Image(image: AssetImage(AppAssets.ship)),
-          //                 )),
-          //           ],
-          //         ),
-          //       )),
-          // ),
-
-          //  child:
           AnimatedSliverToBoxAdapter(),
-          //  ),
+        ],
+      ),
+    );
+  }
+}
+
+class AppBarSearchWidget extends StatelessWidget {
+  final bool isEnabled;
+  const AppBarSearchWidget({
+    super.key,
+    required this.isEnabled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(30)),
+      width: myScreenWidth(0.85, context),
+      height: screenAwareSize(25, context),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            width: 5,
+          ),
+          const Icon(
+            Icons.search,
+            color: primaryColor,
+          ),
+          Expanded(
+              child: TextField(
+            enabled: isEnabled,
+            decoration: const InputDecoration(
+                hintText: ' Enter the receipt number ...',
+                hintStyle: TextStyle(fontSize: 12)),
+          )),
+          const Padding(
+            padding: EdgeInsets.all(4.3),
+            child: CircleAvatar(
+              backgroundColor: Colors.orange,
+            ),
+          ),
         ],
       ),
     );
@@ -237,7 +231,7 @@ class MyHomePage extends StatelessWidget {
 
 class SenderReceiverCardWidget extends StatelessWidget {
   final bool isSender;
-  SenderReceiverCardWidget({
+  const SenderReceiverCardWidget({
     super.key,
     required this.isSender,
   });
@@ -323,11 +317,72 @@ class AnimatedSliverToBoxAdapter extends StatefulWidget {
 }
 
 class _AnimatedSliverToBoxAdapterState
-    extends State<AnimatedSliverToBoxAdapter> {
-  ScrollController _scrollController = ScrollController();
+    //  extends State<AnimatedSliverToBoxAdapter> {
+    // final ScrollController _scrollController = ScrollController();
+    extends State<AnimatedSliverToBoxAdapter>
+    with SingleTickerProviderStateMixin {
+  // ScrollController _scrollController = ScrollController();
+  bool _animate = false;
+
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+
+    // Start the animation when the widget is built
+    Future.delayed(const Duration(milliseconds: 100), () {
+      setState(() {
+        _animate = true;
+        _animationController.forward(); // Start the animation
+      });
+    });
+
+    //   _animationController.forward();
+    // });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final position = Tween<Offset>(
+      begin: Offset(1.0, 0), // Start from the right
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Interval(
+          (1 + 1) / 3, // Adjust the intervals
+          1.0,
+          curve: Curves.bounceIn, // Apply bounce effect
+        ),
+      ),
+    );
+
+    final opacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Interval(
+          (1 + 1) / 3, // Adjust the intervals
+          1.0,
+          curve: Curves.bounceIn, // Apply fade-in effect
+        ),
+      ),
+    );
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -336,28 +391,108 @@ class _AnimatedSliverToBoxAdapterState
           child: SizedBox(
             height: 200,
             child: AnimatedBuilder(
-              animation: _scrollController,
+              animation: _animationController,
               builder: (context, child) {
                 return ListView(
                   scrollDirection: Axis.horizontal,
-                  controller: _scrollController,
+                  //  controller: _scrollController,
                   children: [
                     Container(
-                      width: 200,
-                      child: GridTile(
-                        child: Image(image: AssetImage(AppAssets.ship)),
+                      width: 180,
+                      child: SlideTransition(
+                        position: position,
+                        child: GridTile(
+                          header: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Ocean Freight',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: blackLiteColor.withOpacity(0.8)),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text('International',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: blackLiteColor.withOpacity(0.8))),
+                            ],
+                          ),
+                          child: Image(image: AssetImage(AppAssets.ship)),
+                        ),
                       ),
                     ),
                     Container(
-                      width: 200,
-                      child: GridTile(
-                        child: Image(image: AssetImage(AppAssets.truck)),
+                      width: 180,
+                      child: FadeTransition(
+                        opacity: opacity,
+                        child: SlideTransition(
+                          position: position,
+                          child: GridTile(
+                            header: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Ocean Freight',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: blackLiteColor.withOpacity(0.8)),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text('Reliable',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            blackLiteColor.withOpacity(0.8))),
+                              ],
+                            ),
+                            child: Image(image: AssetImage(AppAssets.truck)),
+                          ),
+                        ),
                       ),
                     ),
                     Container(
-                      width: 200,
-                      child: GridTile(
-                        child: Image(image: AssetImage(AppAssets.ship)),
+                      width: 180,
+                      child: FadeTransition(
+                        opacity: opacity,
+                        child: SlideTransition(
+                          position: position,
+                          child: GridTile(
+                            header: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Ocean Freight',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: blackLiteColor.withOpacity(0.8)),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text('International',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            blackLiteColor.withOpacity(0.8))),
+                              ],
+                            ),
+                            child: Image(image: AssetImage(AppAssets.plane)),
+                          ),
+                        ),
                       ),
                     ),
                   ],

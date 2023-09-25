@@ -52,7 +52,7 @@ class DashboardScreen extends StatelessWidget {
         children: [
           BottomNavigationBar(
             selectedItemColor: primaryColor,
-            unselectedItemColor: unselectedColor,
+            unselectedItemColor: blackLiteColor,
             showSelectedLabels:
                 true, // Set to true to show labels for selected items
             showUnselectedLabels:
