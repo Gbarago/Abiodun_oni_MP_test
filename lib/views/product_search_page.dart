@@ -27,7 +27,6 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        // foregroundColor: primaryColor,
         toolbarHeight: 100,
         automaticallyImplyLeading: false,
         title: Row(

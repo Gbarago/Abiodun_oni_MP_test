@@ -4,6 +4,7 @@ import 'package:abiodun_mobile/views/shipment/pending_shipment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/nav_provider.dart';
+import '../../providers/product_peovider.dart';
 import 'all_shipping_tab_widget.dart.dart';
 
 class ShipmentHistoryScreen extends StatelessWidget {
@@ -11,37 +12,52 @@ class ShipmentHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabProvider = Provider.of<TabProvider>(context, listen: false);
+    final tabProvider = Provider.of<TabProvider>(
+      context,
+    );
+
     final tabs = [
-      CustomTab(
-        label: 'All',
-        notificationCount: 22,
-        isActive: tabProvider.selectedTabIndex == 0,
-      ),
-      CustomTab(
-        label: 'Completed',
-        notificationCount: 10,
-        isActive: tabProvider.selectedTabIndex == 1,
-      ),
-      CustomTab(
-        label: 'In progress',
-        notificationCount: 9,
-        isActive: tabProvider.selectedTabIndex == 2 ? true : false,
-      ),
-      CustomTab(
-        label: 'Pending',
-        notificationCount: 3,
-        isActive: tabProvider.selectedTabIndex == 3,
-      ),
-      CustomTab(
-        label: 'Canceled',
-        isActive: tabProvider.selectedTabIndex == 4,
-      ),
-      CustomTab(
-        label: 'Returned',
-        notificationCount: 60,
-        isActive: tabProvider.selectedTabIndex == 5,
-      ),
+      Consumer<TabProvider>(builder: (context, productProvider, _) {
+        return CustomTab(
+          label: 'All',
+          notificationCount: 22,
+          isActive: tabProvider.selectedTabIndex == 0,
+        );
+      }),
+      Consumer<TabProvider>(builder: (context, provider, _) {
+        return CustomTab(
+          label: 'Completed',
+          notificationCount: 10,
+          isActive: provider.selectedTabIndex == 1,
+        );
+      }),
+      Consumer<TabProvider>(builder: (context, provider, _) {
+        return CustomTab(
+          label: 'In progress',
+          notificationCount: 9,
+          isActive: provider.selectedTabIndex == 2,
+        );
+      }),
+      Consumer<TabProvider>(builder: (context, provider, _) {
+        return CustomTab(
+          label: 'Pending',
+          notificationCount: 3,
+          isActive: provider.selectedTabIndex == 3,
+        );
+      }),
+      Consumer<TabProvider>(builder: (context, provider, _) {
+        return CustomTab(
+          label: 'Canceled',
+          isActive: provider.selectedTabIndex == 4,
+        );
+      }),
+      Consumer<TabProvider>(builder: (context, provider, _) {
+        return CustomTab(
+          label: 'Returned',
+          notificationCount: 60,
+          isActive: provider.selectedTabIndex == 5,
+        );
+      }),
     ];
 
     final tabController = TabController(
@@ -63,6 +79,7 @@ class ShipmentHistoryScreen extends StatelessWidget {
         ),
         title: const Text('Shipment History'),
         bottom: TabBar(
+          indicatorColor: accentColor,
           isScrollable: true,
           controller: tabController,
           tabs: tabs,
@@ -71,7 +88,6 @@ class ShipmentHistoryScreen extends StatelessWidget {
       body: TabBarView(
         controller: tabController,
         children: const [
-          // Your tab content for each tab goes here
           AllSgipmentTabWidget(),
           SizedBox(
             child: Center(
@@ -79,7 +95,6 @@ class ShipmentHistoryScreen extends StatelessWidget {
             ),
           ),
           InProgressSgipmentTabWidget(),
-
           PendingSgipmentTabWidget(),
           SizedBox(
             child: Center(
@@ -113,8 +128,6 @@ class CustomTab extends StatelessWidget {
     return Tab(
       child: Row(
         children: [
-          //    const Row(
-
           Row(
             children: [
               Text(
