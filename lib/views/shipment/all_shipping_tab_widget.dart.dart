@@ -29,10 +29,10 @@ class AllSgipmentTabWidget extends StatelessWidget {
               ),
             ],
           ),
-          ShipmentWidget(status: 'In-Progress'),
-          ShipmentWidget(status: 'In-Progress'),
-          ShipmentWidget(status: 'Pending'),
-          ShipmentWidget(status: 'Loading')
+          const ShipmentWidget(status: 'In-Progress'),
+          const ShipmentWidget(status: 'In-Progress'),
+          const ShipmentWidget(status: 'Pending'),
+          const ShipmentWidget(status: 'Loading')
         ],
       ).animate().fadeIn(duration: 500.ms).slideY(begin: .1, end: .0),
     );

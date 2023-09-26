@@ -11,7 +11,7 @@ class ShipmentHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabProvider = Provider.of<TabProvider>(context);
+    final tabProvider = Provider.of<TabProvider>(context, listen: false);
     final tabs = [
       CustomTab(
         label: 'All',
@@ -57,6 +57,7 @@ class ShipmentHistoryScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             tabProvider.setPageIndex(0);
+            tabProvider.setNavVisibility(0);
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),

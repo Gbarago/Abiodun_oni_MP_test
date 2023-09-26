@@ -14,7 +14,7 @@ class CalculateSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabProvider = Provider.of<TabProvider>(context);
+    final tabProvider = Provider.of<TabProvider>(context, listen: false);
 
     return Scaffold(
       body: Column(

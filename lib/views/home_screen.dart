@@ -17,14 +17,13 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: primaryColor,
         toolbarHeight: 170,
-        //screenAwareSize(120, context),
         centerTitle: false,
         automaticallyImplyLeading: true,
         title: Column(
           children: [
             Row(
               children: [
-                Padding(
+                const Padding(
                     padding: EdgeInsets.only(left: 5, right: 10),
                     child: CircleAvatar(
                       backgroundImage: AssetImage(AppAssets.profilePng),
@@ -110,7 +109,7 @@ class MyHomePage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 height: myScreenHeight(1, context) > 700
-                    ? 320
+                    ? 310
                     : screenAwareSize(310, context),
                 child: Column(
                   children: [
@@ -311,9 +310,6 @@ class SenderReceiverCardWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: blackLiteColor.withOpacity(0.8)),
             ),
-            // const SizedBox(
-            //   height: 2,
-            // ),
             SizedBox(
               width: 140,
               child: Row(
@@ -322,7 +318,7 @@ class SenderReceiverCardWidget extends StatelessWidget {
                     Container(
                       width: 10,
                       height: 10,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.green,
                       ),
@@ -348,12 +344,8 @@ class AnimatedSliverToBoxAdapter extends StatefulWidget {
       _AnimatedSliverToBoxAdapterState();
 }
 
-class _AnimatedSliverToBoxAdapterState
-    //  extends State<AnimatedSliverToBoxAdapter> {
-    // final ScrollController _scrollController = ScrollController();
-    extends State<AnimatedSliverToBoxAdapter>
+class _AnimatedSliverToBoxAdapterState extends State<AnimatedSliverToBoxAdapter>
     with SingleTickerProviderStateMixin {
-  // ScrollController _scrollController = ScrollController();
   bool _animate = false;
 
   late AnimationController _animationController;
@@ -374,9 +366,6 @@ class _AnimatedSliverToBoxAdapterState
         _animationController.forward(); // Start the animation
       });
     });
-
-    //   _animationController.forward();
-    // });
   }
 
   @override
@@ -388,12 +377,12 @@ class _AnimatedSliverToBoxAdapterState
   @override
   Widget build(BuildContext context) {
     final position = Tween<Offset>(
-      begin: Offset(1.0, 0), // Start from the right
+      begin: const Offset(1.0, 0), // Start from the right
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Interval(
+        curve: const Interval(
           (1 + 1) / 3, // Adjust the intervals
           1.0,
           curve: Curves.bounceIn, // Apply bounce effect
@@ -407,7 +396,7 @@ class _AnimatedSliverToBoxAdapterState
     ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Interval(
+        curve: const Interval(
           (1 + 1) / 3, // Adjust the intervals
           1.0,
           curve: Curves.bounceIn, // Apply fade-in effect
@@ -519,7 +508,10 @@ class _AnimatedSliverToBoxAdapterState
                                       color: blackLiteColor.withOpacity(0.8))),
                             ],
                           ),
-                          child: Image(image: AssetImage(AppAssets.plane)),
+                          child: Image(image: AssetImage(AppAssets.plane))
+                              .animate()
+                              .fadeIn(duration: 600.ms)
+                              .slide(begin: const Offset(.3, 0.0)),
                         ),
                       ),
                     ),
@@ -527,8 +519,7 @@ class _AnimatedSliverToBoxAdapterState
                 ],
               )
                   .animate()
-                  .fadeIn(duration: 800.ms)
-                  // baseline=800ms
+                  .fadeIn(duration: 600.ms)
                   .slide(begin: const Offset(.3, 0.0));
             },
           ),

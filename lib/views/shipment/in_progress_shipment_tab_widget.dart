@@ -32,11 +32,6 @@ class InProgressSgipmentTabWidget extends StatelessWidget {
           const ShipmentWidget(status: 'In-Progress'),
           const ShipmentWidget(status: 'In-Progress'),
           const ShipmentWidget(status: 'In-Progress')
-
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 2)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 3)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 5)),
-          //ShipmentWidget().animate().blurXY(delay: Duration(seconds: 6)),
         ],
       ).animate().fadeIn(duration: 500.ms).slideY(begin: .1, end: .0),
     );

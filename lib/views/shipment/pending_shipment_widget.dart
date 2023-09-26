@@ -9,40 +9,30 @@ class PendingSgipmentTabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ListView(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Shipments",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  color: darkerPrimaryColor,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Shipments",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                    color: darkerPrimaryColor,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const ShipmentWidget(status: 'Pending'),
-          const ShipmentWidget(status: 'Pending'),
-          const ShipmentWidget(status: 'Pending'),
-          const ShipmentWidget(status: 'Pending'),
-
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 2)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 3)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 5)),
-          //ShipmentWidget().animate().blurXY(delay: Duration(seconds: 6)),
-        ],
-      )
-          .animate()
-          .fadeIn(duration: 200.ms)
-          // baseline=800ms
-          .slide(begin: Offset(0, .1)),
-    );
+              ],
+            ),
+            const ShipmentWidget(status: 'Pending'),
+            const ShipmentWidget(status: 'Pending'),
+            const ShipmentWidget(status: 'Pending'),
+            const ShipmentWidget(status: 'Pending'),
+          ],
+        ).animate().fadeIn(duration: 500.ms).slideY(begin: .1, end: .0));
   }
 }

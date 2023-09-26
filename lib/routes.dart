@@ -23,36 +23,25 @@ class Routes {
   // static const String signUpFormScreen = '/signUp_fortm_screen';
 
   static final Map<String, WidgetBuilder> routes = {
-    dashboard: (context) => ChangeNotifierProvider(
-          create: (context) => TabProvider(),
-          child: DashboardScreen(),
-        ),
+    // dashboard: (context) => ChangeNotifierProvider(
+    //       create: (context) => TabProvider(),
+    //       child:const DashboardScreen(),
+    //     ),
 
-    calculateSummary: (context) => ChangeNotifierProvider(
-          create: (context) => TabProvider(),
-          child: CalculateSummaryScreen(),
-        ),
+    // calculateSummary: (context) => ChangeNotifierProvider(
+    //       create: (context) => TabProvider(),
+    //       child: CalculateSummaryScreen(),
+    //     ),
 
-    home: (context) => MyHomePage(),
+    dashboard: (context) => const DashboardScreen(),
+
+    calculateSummary: (context) => const CalculateSummaryScreen(),
+
+    home: (context) => const MyHomePage(),
 
     searchProductsScreen: (context) => ChangeNotifierProvider(
           create: (context) => ProductProvider(productsList),
           child: ProductSearchPage(),
         ),
-
-    // signUpEnterPhone: (context) => ChangeNotifierProvider(
-    //       create: (context) => SignupProvider(),
-    //       child: SignupEnterPhoneNumberScreen(),
-    //     ),
-    // signUpFormScreen: (context) => SignUpFormScreen(),
-    // uploadImageScreen: (context) => UploadPhotoSvreen(),
-    // uploadSuccessScreen: (context) => UploadSuccessScreen(),
-    // loginScreen: (context) => LoginScreen(),
-
-    // dashboardScreen: (context) => DashboardScreen(),
-
-    // forgotPasswordScreen: (context) => ForgotPasswordScreen(),
-
-    /// settings: (context) => SettingsScreen(),
   };
 }

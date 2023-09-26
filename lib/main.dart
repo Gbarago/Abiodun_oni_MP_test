@@ -1,10 +1,16 @@
+import 'package:abiodun_mobile/providers/nav_provider.dart';
 import 'package:abiodun_mobile/routes.dart';
 import 'package:abiodun_mobile/theme.dart';
 import 'package:abiodun_mobile/views/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => TabProvider(),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +21,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mobile Dev Test',
-      theme: AppTheme.lightTheme(context), // Use your custom light theme
-      darkTheme: AppTheme.darkTheme(context),
-      // home: const MyHomePage(title: ''),
-
-      initialRoute: Routes.dashboard, // Set the initial route
+      theme: AppTheme.lightTheme(context),
+      initialRoute: Routes.dashboard,
       routes: Routes.routes,
     );
   }
