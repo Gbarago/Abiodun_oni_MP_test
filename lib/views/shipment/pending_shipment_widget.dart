@@ -40,9 +40,9 @@ class PendingSgipmentTabWidget extends StatelessWidget {
         ],
       )
           .animate()
-          .fadeIn(duration: 500.ms)
+          .fadeIn(duration: 200.ms)
           // baseline=800ms
-          .slide(begin: Offset(0, 1.0)),
+          .slide(begin: Offset(0, .1)),
     );
   }
 }

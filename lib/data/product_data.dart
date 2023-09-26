@@ -49,28 +49,16 @@ final List<Product> productsList = [
     receiverAddress: 'Accra',
     receiptNumber: '#NEJ6789012345',
   ),
-  Product(
-    name: 'Leather Handbag',
-    senderAddress: 'Sydney, Australia',
-    receiverAddress: 'Auckland, ',
-    receiptNumber: '#NEJ7890123456',
-  ),
-  Product(
-    name: 'Smartwatch',
-    senderAddress: 'Moscow',
-    receiverAddress: 'Beijing',
-    receiptNumber: '#NEJ8901234567',
-  ),
-  Product(
-    name: 'Winter Coat',
-    senderAddress: 'Rio de Janeiro',
-    receiverAddress: 'Buenos Aires',
-    receiptNumber: '#NEJ9012345678',
-  ),
-  Product(
-    name: 'Sneakers',
-    senderAddress: 'Cairo',
-    receiverAddress: 'Cape Town',
-    receiptNumber: '#NEJ0123456789',
-  ),
+  // Product(
+  //   name: 'Leather Handbag',
+  //   senderAddress: 'Sydney, Australia',
+  //   receiverAddress: 'Auckland, ',
+  //   receiptNumber: '#NEJ7890123456',
+  // ),
+  // Product(
+  //   name: 'Smartwatch',
+  //   senderAddress: 'Moscow',
+  //   receiverAddress: 'Beijing',
+  //   receiptNumber: '#NEJ8901234567',
+  // ),
 ];

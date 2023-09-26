@@ -15,6 +15,9 @@ class AppAssets {
   static const String loading = "$baseIconPath/loading.svg";
   static const String pending = "$baseIconPath/pending.svg";
   static const String progress = "$baseIconPath/progress.svg";
+  static const String sendAddress = "$baseIconPath/send_address.svg";
+  static const String receiveAddress = "$baseIconPath/receive_address.svg";
+  static const String weight = "$baseIconPath/weight.svg";
 
   // image Assets
   static const String forklift = "$baseImagePath/fork.png";

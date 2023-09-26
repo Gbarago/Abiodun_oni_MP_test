@@ -52,6 +52,7 @@ class ShipmentHistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: blackLiteColor.withOpacity(0.01),
       appBar: AppBar(
+        backgroundColor: primaryColor,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

@@ -5,29 +5,32 @@ import 'package:abiodun_mobile/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'views/calculate_views/calculate_summary_screen.dart';
 import 'views/dashboard_screen.dart';
 import 'views/product_search_page.dart';
 
 class Routes {
   static const String dashboard = '/';
   static const String home = 'home';
-
   static const String searchProductsScreen = 'search_product_screen';
+  static const String calculateSummary = 'calculate_summary_screen.dart';
+
+  // static const String home = '/home';
 
   // static const String home = '/home';
   // static const String onboarding = '/onboarding';
   // static const String signUpEnterPhone = '/signUp_enter_phone_number';
   // static const String signUpFormScreen = '/signUp_fortm_screen';
-  // static const String uploadImageScreen = '/uploadImageScreens_screen';
-  // static const String uploadSuccessScreen = '/upload_success';
-  // static const String loginScreen = '/login_screen';
-  // static const String dashboardScreen = '/dashboard_screen';
-  // static const String forgotPasswordScreen = '/forgot_password_screen';
 
   static final Map<String, WidgetBuilder> routes = {
     dashboard: (context) => ChangeNotifierProvider(
           create: (context) => TabProvider(),
           child: DashboardScreen(),
+        ),
+
+    calculateSummary: (context) => ChangeNotifierProvider(
+          create: (context) => TabProvider(),
+          child: CalculateSummaryScreen(),
         ),
 
     home: (context) => MyHomePage(),

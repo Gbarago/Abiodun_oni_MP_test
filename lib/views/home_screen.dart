@@ -15,7 +15,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: screenAwareSize(120, context),
+        backgroundColor: primaryColor,
+        toolbarHeight: 170,
+        //screenAwareSize(120, context),
         centerTitle: false,
         automaticallyImplyLeading: true,
         title: Column(
@@ -43,12 +45,17 @@ class MyHomePage extends StatelessWidget {
                         const Text(
                           'Your location',
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 14),
+                              fontWeight: FontWeight.w500, fontSize: 12),
                         )
                       ],
                     ),
                     const Row(
-                      children: [Text('Werthiemer Illinois')],
+                      children: [
+                        Text(
+                          'Werthiemer Illinois',
+                          style: TextStyle(fontSize: 15),
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -103,7 +110,7 @@ class MyHomePage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 height: myScreenHeight(1, context) > 700
-                    ? 310
+                    ? 320
                     : screenAwareSize(310, context),
                 child: Column(
                   children: [
@@ -112,10 +119,10 @@ class MyHomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Shipment Number',
-                              style: TextStyle(fontSize: 16)),
+                              style: TextStyle(fontSize: 14)),
                           Text('NEJ2008992413301',
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w600)),
+                                  fontSize: 18, fontWeight: FontWeight.w600)),
                         ],
                       ),
                       trailing: Container(
@@ -132,16 +139,6 @@ class MyHomePage extends StatelessWidget {
                       child: Divider(
                         height: 4,
                         color: Colors.black45.withOpacity(0.2),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Divider(
-                        height: 4,
-                        color: Colors.black45,
                       ),
                     ),
                     const SizedBox(
@@ -203,10 +200,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           AnimatedSliverToBoxAdapter(),
-        ])
-            .animate()
-            .fadeIn(duration: 500.ms)
-            .slide(begin: const Offset(0, 1.0)),
+        ]).animate().fadeIn(duration: 300.ms).slide(begin: const Offset(0, .3)),
       ),
     );
   }
@@ -535,7 +529,7 @@ class _AnimatedSliverToBoxAdapterState
                   .animate()
                   .fadeIn(duration: 800.ms)
                   // baseline=800ms
-                  .slide(begin: const Offset(1.0, 0.0));
+                  .slide(begin: const Offset(.3, 0.0));
             },
           ),
         ),

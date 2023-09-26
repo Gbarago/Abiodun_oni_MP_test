@@ -32,19 +32,9 @@ class AllSgipmentTabWidget extends StatelessWidget {
           ShipmentWidget(status: 'In-Progress'),
           ShipmentWidget(status: 'In-Progress'),
           ShipmentWidget(status: 'Pending'),
-
           ShipmentWidget(status: 'Loading')
-
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 2)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 3)),
-          // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 5)),
-          //ShipmentWidget().animate().blurXY(delay: Duration(seconds: 6)),
         ],
-      )
-          .animate()
-          .fadeIn(duration: 500.ms)
-          // baseline=800ms
-          .slide(begin: Offset(0, 1.0)),
+      ).animate().fadeIn(duration: 500.ms).slideY(begin: .1, end: .0),
     );
   }
 }

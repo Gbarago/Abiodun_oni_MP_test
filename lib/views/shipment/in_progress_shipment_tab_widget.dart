@@ -38,11 +38,7 @@ class InProgressSgipmentTabWidget extends StatelessWidget {
           // ShipmentWidget().animate().blurXY(delay: Duration(seconds: 5)),
           //ShipmentWidget().animate().blurXY(delay: Duration(seconds: 6)),
         ],
-      )
-          .animate()
-          .fadeIn(duration: 500.ms)
-          // baseline=800ms
-          .slide(begin: Offset(0, 1.0)),
+      ).animate().fadeIn(duration: 500.ms).slideY(begin: .1, end: .0),
     );
   }
 }
